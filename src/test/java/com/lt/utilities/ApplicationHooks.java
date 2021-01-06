@@ -26,7 +26,7 @@ public class ApplicationHooks extends TestBase {
 			LOGGER.info("Before scenario...");
 			setupTest();
 			setupScenario(scenarios);
-			extentLogger = getextentLogger();
+			scenario.log("Executing tests on " + browser.toString() + " browser...");
 		} catch (MalformedURLException e) {
 			LOGGER.debug("Exception : " + e);
 		}
