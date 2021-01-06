@@ -1,17 +1,17 @@
 Feature: Login page feature
 
-@LoginTitle @ETE
+@LoginTitle @ETE_1
 Scenario: Login page title
 Given User is on home page
 When user gets the title of the page
 Then page title should be "Login - My Store"
 
-@ForgetPwdLink @ETE
+@ForgetPwdLink @ETE_1
 Scenario: Forgot Password link
 Given User is on home page
 Then forgot your password link should be displayed
 
-@CorrectLogin @ETE
+@CorrectLogin @ETE_1
 Scenario Outline: Login with correct credentials
 Given User is on home page
 When user enters username "<EmailID>"

@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.google.inject.PrivateBinder;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -143,8 +142,11 @@ public class TestBaseLt {
 
 	public void extentTestConfig() {
 
-		ExtentSparkReporter reporter = new ExtentSparkReporter(
-				System.getProperty("user.dir") + "\\test-output\\ExtentReports\\extent-report.html");
+		/*
+		 * ExtentSparkReporter reporter = new ExtentSparkReporter(
+		 * System.getProperty("user.dir") +
+		 * "\\test-output\\ExtentReports\\extent-report.html");
+		 */
 		extent = new ExtentReports();
 		// extent.attachReporter(reporter);
 	}

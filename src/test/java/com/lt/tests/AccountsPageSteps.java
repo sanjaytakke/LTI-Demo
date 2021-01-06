@@ -11,6 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lt.autotest.handlers.AssertHandler;
+import com.lt.autotest.utils.Config;
+import com.lt.base.TestBase;
 import com.lt.base.TestBaseLt;
 import com.lt.containers.AccountPageContainer;
 
@@ -18,13 +21,13 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class AccountsPageSteps extends TestBaseLt {
+public class AccountsPageSteps extends TestBase {
 
 	private LoginPage loginPage = new LoginPage();
 	public WebDriver driver = getDriver();
 	private AccountPageContainer accountPageContainer = PageFactory.initElements(driver, AccountPageContainer.class);
 	private static final Logger LOGGER = LoggerFactory.getLogger(AccountsPageSteps.class.getName());
-	
+
 	@Given("user has already logged in to application")
 	public void user_has_already_logged_in_to_application(DataTable credTable) {
 
@@ -32,14 +35,18 @@ public class AccountsPageSteps extends TestBaseLt {
 		String userName = credList.get(0).get("username");
 		String password = credList.get(0).get("password");
 
-		driver.get(getPropertyValue().getProperty("application.url"));
+		try {
+			driver.get(Config.getPropertyValue("application.url"));
+		} catch (Exception e) {
+			LOGGER.error("AccountsPageSteps : " + e.toString());
+		}
 		loginPage.doLogin(userName, password);
-
 	}
 
 	@Given("user is on Accounts page")
 	public void user_is_on_accounts_page() {
 		String title = driver.getTitle();
+		
 		LOGGER.info("Accounts Page title is: " + title);
 	}
 
@@ -60,9 +67,8 @@ public class AccountsPageSteps extends TestBaseLt {
 		}
 
 		LOGGER.info("Actual accounts section list: " + actualAccountSectionsList);
-
 		Assert.assertTrue(expAccountSectionsList.containsAll(actualAccountSectionsList));
-
+	
 	}
 
 	@Then("accounts section count should be {int}")
